@@ -12,7 +12,10 @@ def index(request):
 
 @login_required
 def special(request):
-    return HttpResponse("You are logged in!")
+    all_users = UserProfileInfo.objects.select_related('user')
+    # for user in all_users:
+    #     print(user)
+    return HttpResponse(all_users[0].occupation)
 
 @login_required
 def user_logout(request):
@@ -65,16 +68,14 @@ def user_login(request):
 # READ
 def dashboard(request):
     all_users = UserProfileInfo.objects.select_related('user')
-    for user in all_users:
-        print(user)
-    return render(request,'hello_world/dashboard.html')
+    return render(request,'hello_world/dashboard.html',{'all_users':all_users})
 
-# UPDATE
-def user_login(request):
-    all_users = Entry.objects.all()
-    return render(request,'hello_world/dashboard.html')
+# # UPDATE
+# def user_login(request):
+#     all_users = Entry.objects.all()
+#     return render(request,'hello_world/dashboard.html')
 
-# DELETE
-def user_login(request):
-    all_users = Entry.objects.all()
-    return render(request,'hello_world/dashboard.html')
+# # DELETE
+# def user_login(request):
+#     all_users = Entry.objects.all()
+#     return render(request,'hello_world/dashboard.html')

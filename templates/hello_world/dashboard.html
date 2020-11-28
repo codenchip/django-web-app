@@ -3,8 +3,14 @@
 <div class="container">
   <div class="jumbotron">
     <h1>Welcome to the Forward School !</h1>
-    {% if user.is_authenticated %}
-        <h2>Hello {{ user.username }}</h2>
+    {% if all_users %}
+        {% for user in all_users %}
+            <h2>{{user.username}}</h2>
+            <h2>{{user.occupation}}</h2>
+            <h2>{{user.hobby}}</h2>
+            <h2>{{user.company}}</h2>
+            <h2>{{user.user.last_login}}</h2>
+        {% endfor %}
     {% else %}
         <h2>Register or Login if you'd like to</h2>
     {% endif %}

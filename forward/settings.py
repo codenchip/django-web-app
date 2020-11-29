@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_tables2',
     'hello_world',
     'book',
     'combine',
@@ -134,3 +135,5 @@ LOGIN_URL = '/hello_world/user_login/'
 
 ALLOWED_HOSTS=['*']
 CORS_ORIGIN_ALLOW_ALL = True
+
+DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap.html"

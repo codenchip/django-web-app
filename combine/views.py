@@ -101,3 +101,32 @@ class PlotlyChartView(TemplateView):
         return render(request, 'combine/plotly.html', context={'plot_div':plot_div})
 
 # Part 4: Plotly Dash (Does not involves Javascript)
+
+# Part 5: Datatables 
+import django_tables2 as tables
+from book.models import Book
+from hello_world.models import User, UserProfileInfo
+
+# Table Class
+class BookTable(tables.Table):
+    class Meta:
+        model = Book
+
+# View
+class BookTableView(tables.SingleTableView):
+    table_class=BookTable
+    queryset=Book.objects.all()
+    template_name="combine/table.html"
+
+# Table Class
+class UserTable(tables.Table):
+    class Meta:
+        model = UserProfileInfo
+
+# View
+class UserTableView(tables.SingleTableView):
+    table_class=UserTable
+    # queryset=UserProfileInfo.objects.select_related('user')
+    queryset=UserProfileInfo.objects.all()
+    template_name="combine/table.html"
+

@@ -15,4 +15,6 @@ urlpatterns=[
     path('chart/',views.HomeView.as_view(), name='home-view'),
     path('chart-api/',views.ChartData.as_view(), name='chart-api'),
     path('plotly-chart/',views.PlotlyChartView.as_view(), name='plotly-chart'),
+    path('book-table/',views.BookTableView.as_view()),
+    path('user-table/',views.UserTableView.as_view())
 ]

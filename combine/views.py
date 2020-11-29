@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from forward.settings import MEDIA_URL,MEDIA_ROOT
 from django.conf.urls.static import static
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, View 
 
 import numpy as np
 import pandas as pd
@@ -15,7 +15,7 @@ class HomePageView(TemplateView):
     def get(self,request,**kwargs):
         return render(request, 'combine/index.html', context=None)
 
-class PythonDemo(TemplateView):
+class Api(TemplateView):
     # Create your views here.
     def getNums(request):
         n = np.array([2,3,4])
@@ -57,3 +57,47 @@ class PythonDemo(TemplateView):
         response = HttpResponse(content_type="image/jpeg")
         graph.savefig(response, format="png")
         return response
+
+# Part 2: CHART.JS (Involves Javascript)
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
+class HomeView(TemplateView):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'combine/charts.html')
+
+class ChartData(APIView):
+    authentication_classes=[]
+    permission_classes=[]
+
+    def get(self, request, format=None):
+        labels=['January','February',"March","April","May","June","July"]
+        chartLabel="My Data"
+        chartData=[0,10,5,2,20,30,45]
+        data = {
+            "labels":labels, 
+            "chartLabel":chartLabel, 
+            "chartdata":chartData, 
+        }
+        return Response(data)
+
+# Part 3: Plot.ly (Does not involves Javascript)
+from plotly.offline import plot
+import plotly.graph_objs as go
+
+class PlotlyChartView(TemplateView):
+    def get(self, request, *args, **kwargs):
+        x_data=[0,1,2,3]
+        y_data=[x**2 for x in x_data]
+        plot_div = plot([go.Scatter(
+            x=x_data,
+            y=y_data,
+            mode='lines',
+            name='My Plotly Chart',
+            opacity=0.8,
+            marker_color='green'
+        )], output_type='div')
+
+        return render(request, 'combine/plotly.html', context={'plot_div':plot_div})
+
+# Part 4: Plotly Dash (Does not involves Javascript)

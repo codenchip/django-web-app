@@ -49,6 +49,7 @@
     </div>
 </div>
 <script>
+    // Make API calls
     function click1() {
 		fetch('{% url 'combine:get-num' %}')
 		.then(res => res.text())

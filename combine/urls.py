@@ -7,9 +7,12 @@ app_name = 'combine'
 
 urlpatterns=[
     path('',views.HomePageView.as_view(), name='home'),
-    path('getnum/',views.PythonDemo.getNums, name='get-num'),
-    path('getavg/',views.PythonDemo.getAvg, name='get-avg'),
-    path('getgraph/',views.PythonDemo.getGraph, name='get-graph'),
-    path('getdata/',views.PythonDemo.getData, name='get-data'),
-    path('get-seaborn-graph/',views.PythonDemo.getSeabornGraph, name='get-seaborn-graph'),
+    path('getnum/',views.Api.getNums, name='get-num'),
+    path('getavg/',views.Api.getAvg, name='get-avg'),
+    path('getgraph/',views.Api.getGraph, name='get-graph'),
+    path('getdata/',views.Api.getData, name='get-data'),
+    path('get-seaborn-graph/',views.Api.getSeabornGraph, name='get-seaborn-graph'),
+    path('chart/',views.HomeView.as_view(), name='home-view'),
+    path('chart-api/',views.ChartData.as_view(), name='chart-api'),
+    path('plotly-chart/',views.PlotlyChartView.as_view(), name='plotly-chart'),
 ]
